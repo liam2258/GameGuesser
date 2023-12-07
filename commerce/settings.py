@@ -87,12 +87,26 @@ WSGI_APPLICATION = 'commerce.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# settings.py
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dbkacvh9fa84p',
+        'USER': 'hthxmcrkzvauig',
+        'PASSWORD': 'e2318291f989b25ec86d1ac90c1c0c69c784af0786793b59c5d0bb3fb47db32d',
+        'HOST': 'ec2-34-238-201-192.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 AUTH_USER_MODEL = 'auctions.User'
 
