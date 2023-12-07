@@ -1,0 +1,34 @@
+{% extends "auctions/layout.html" %}
+
+{% block main %}
+<h2>Create New Listing</h2>
+
+<form action="{% url 'create' %}" method="POST">
+    {% csrf_token %}
+    <div>
+        <label for="title">Title</label>
+        <input type="text" name="title" class="form-control" id="title" placeholder="Enter Title">
+    </div>
+    <div>
+        <label for="description">Description</label>
+        <input type="text" name="description" class="form-control" id="description" placeholder="Enter Description">
+    </div>    
+    <div>
+        <label for="imageurl">Image URL</label>
+        <input type="text" name="imageurl" class="form-control" id="imageurl" placeholder="Enter Image URL">
+    </div>
+    <div>
+        <label for="price">Price</label>
+        <input type="number" min="0" name="price" class="form-control" id="price" placeholder="Enter Price">
+    </div>
+    Select Category: 
+    <select name="category" id="category">
+        {% for item in categories %}
+        <option value="{{item}}">{{item}}</option>
+        {% endfor %}
+    </select>
+    <div>
+        <button type="submit">Create New Listing</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "auctions/layout.html" %}
+
+{% block main %}
+<h2>Categories</h2>
+
+{% if categories %}
+    <article style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); row-gap: 10px">
+        {% for category in categories %}
+            <div>
+                <h2><a href="{% url 'categoryList' category %}">{{ category }}</a></h2>
+                <img src="auctions\templates\auctions\{{ category }}.jpg" alt="{{ category }}">
+            </div>
+        {% endfor %}
+    </article>
+{% else %}
+    <p>Watchlist is empty</p>
+{% endif %}
+
+{% endblock %}

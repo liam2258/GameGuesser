@@ -1,0 +1,24 @@
+{% extends "auctions/layout.html" %}
+
+{% block main %}
+<head>
+    <title>Items in Category: {{ category }}</title>
+</head>
+<body>
+    <h1>Items in Category: {{ category }}</h1>
+
+    <ul>
+        {% for listing in listings %}
+        <div>
+            <h2>{{listing.title}}</h2>
+            <img style="min-width: 150px; min-height: 100px; max-height: 20vw; max-width: 15vw;"src="{{listing.imageUrl}}" alt="Product"">
+            <p>{{listing.description}}</p>
+            <p>${{listing.price.bid}}</p>
+            <a href="{% url 'listing' id=listing.id %}"><button>Info</button></a>
+        </div>
+        {% empty %}
+            <p>No items in this category.</p>
+        {% endfor %}
+    </ul>
+</body>
+{% endblock %}

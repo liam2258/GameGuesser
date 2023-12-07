@@ -1,0 +1,71 @@
+{% extends "auctions/layout.html" %}
+
+{% block main %}
+<h1>
+{% if message %}
+    {{message}}
+{% endif %}
+</h1>
+
+<div class="row">
+    {% if user.is_authenticated %}
+        {% if isOwner %}
+            <form action="{% url 'closeAuction' id=listing.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Close Auction</button>
+            </form>
+        {% endif %}
+        {% if isListingInWatchList %}
+            <form action="{% url 'removeWatchList' id=listing.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Remove from Watchlist</button>
+            </form>
+        {% else %}
+        <form action="{% url 'addWatchList' id=listing.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Add to Watchlist</button>
+        </form>
+        {% endif %}
+    {% endif %}
+</div>
+
+
+<h2>{{listing.title}}</h2>
+<img style="max-width: 20vw;" src="{{listing.imageUrl}}" alt="{{listing.title}}">
+<p>Description: {{listing.description}}</p>
+<p>Owner: {{listing.owner}}</p>
+<p>Category: {{listing.category}}</p>
+<p>Price: ${{listing.price.bid}}</p>
+<div>
+    <h2>Make bid</h2>
+    {% if user.is_authenticated %}
+        <form action="{% url 'addBid' id=listing.id %}" method="POST">
+            {% csrf_token %}
+            <input type="number" min="0" name="newBid" placeholder="New Bid">
+            <button type="submit">Submit</button>
+        </form>
+    {% endif %}
+</div>
+<p>{{message}}</p>
+<div>
+    <h2>Comments</h2>
+    {% if user.is_authenticated %}
+        <form id="commentForm" data-url="{% url 'addComment' id=listing.id %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="comment" placeholder="New Comment">
+            <button type="submit">Submit</button>
+        </form>
+    {% endif %}
+</div>
+<ul>
+{% for comment in allComments %}
+
+<li id="commentList">
+    User {{comment.author}} says:
+    <br/>
+    {{comment.message}}
+</li>
+
+{% endfor %}
+</ul>
+{% endblock %}
