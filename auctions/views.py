@@ -241,25 +241,31 @@ def register(request):
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
-
-        # Ensure password matches confirmation
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
+
         if password != confirmation:
             return render(request, "auctions/register.html", {
                 "message": "Passwords must match."
             })
 
-        # Attempt to create new user
         try:
             user = User.objects.create_user(username, email, password)
+            user.backend = 'django.contrib.auth.backends.ModelBackend'  # Set the backend
             user.save()
         except IntegrityError:
             return render(request, "auctions/register.html", {
                 "message": "Username already taken."
             })
-        login(request, user)
-        return HttpResponseRedirect(reverse("index"))
+
+        authenticated_user = authenticate(request, username=username, password=password)
+        if authenticated_user is not None:
+            login(request, authenticated_user)
+            return HttpResponseRedirect(reverse("index"))
+        else:
+            return render(request, "auctions/login.html", {
+                "message": "Failed to log in the user."
+            })
     else:
         return render(request, "auctions/register.html")
     
