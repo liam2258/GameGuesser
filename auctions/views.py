@@ -126,17 +126,6 @@ def displayWatchList(request):
         "listings": listings
     })
 
-'''def removeWatchList(request, id):
-    listingData = Listing.objects.get(pk=id)
-    currentUser = request.user
-    listingData.watchlist.remove(currentUser)
-    return HttpResponseRedirect(reverse("listing", args=(id, )))
-
-def addWatchList(request, id):
-    listingData = Listing.objects.get(pk=id)
-    currentUser = request.user
-    listingData.watchlist.add(currentUser)
-    return HttpResponseRedirect(reverse("listing", args=(id, )))'''
 def removeWatchList(request, id):
     try:
         listingData = Listing.objects.get(pk=id)
