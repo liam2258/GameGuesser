@@ -1,11 +1,13 @@
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.views import PasswordResetView
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User
+from .models import User, Profile
 from .forms import ProfileForm
  
 def index(request):
@@ -77,19 +79,39 @@ def contact(request):
 def reset(request):
     return render(request, "auctions/reset.html")
 
+# def createProfile(request):
+#     if request.method == "POST":
+#         form = ProfileForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect(reverse("profile"))
+#     else:
+#         form = ProfileForm()
+
+#     return render(request, "auctions/profile.html", {"form": form})
 def createProfile(request):
     if request.method == "POST":
-        form = ProfileForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse("profile"))
-    else:
-        form = ProfileForm()
+        print(request.POST)
+        image = request.POST["image"]
+        #user = request.user
+        avatar = request.POST["avatar"]
+        about = request.POST["about"]
+        email = request.POST["email"]
 
-    return render(request, "auctions/profile.html", {"form": form})
 
-from django.contrib.auth.forms import PasswordResetForm
-from django.contrib.auth.views import PasswordResetView
+        newProfile = Profile(
+            image = image,
+           # user = user,
+            avatar = avatar,
+            about = about,
+            email = email
+        )
+
+        newProfile.save()
+
+        return HttpResponseRedirect(reverse("profile"))
+    return render(request, "auctions/index.html")
+
 
 class YourPasswordResetView(PasswordResetView):
     template_name = 'auctions/reset_password.html'

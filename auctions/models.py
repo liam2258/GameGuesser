@@ -17,7 +17,7 @@ class Bid(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="userBid")
 
 class Profile(models.Model):
-    image = models.ImageField(upload_to='profile_images')
+    image = models.CharField(max_length = 200)
     avatar = models.CharField(max_length=50)
     about = models.CharField(max_length=150)
     email = models.CharField(max_length=100)
