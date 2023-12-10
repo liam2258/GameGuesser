@@ -91,26 +91,14 @@ def reset(request):
 #     return render(request, "auctions/profile.html", {"form": form})
 def createProfile(request):
     if request.method == "POST":
-        print(request.POST)
-        image = request.POST["image"]
-        #user = request.user
-        avatar = request.POST["avatar"]
-        about = request.POST["about"]
-        email = request.POST["email"]
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("profile"))
+    else:
+        form = ProfileForm()
 
-
-        newProfile = Profile(
-            image = image,
-           # user = user,
-            avatar = avatar,
-            about = about,
-            email = email
-        )
-
-        newProfile.save()
-
-        return HttpResponseRedirect(reverse("profile"))
-    return render(request, "auctions/index.html")
+    return render(request, "auctions/profile.html", {"form": form, "profile": Profile.objects.first()})
 
 
 class YourPasswordResetView(PasswordResetView):

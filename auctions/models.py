@@ -16,8 +16,9 @@ class Bid(models.Model):
     bid = models.FloatField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="userBid")
 
+
 class Profile(models.Model):
-    image = models.CharField(max_length = 200)
+    image = models.ImageField(upload_to='profile_images')  # Update to ImageField
     avatar = models.CharField(max_length=50)
     about = models.CharField(max_length=150)
     email = models.CharField(max_length=100)

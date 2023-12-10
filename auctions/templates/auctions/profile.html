@@ -2,8 +2,18 @@
 
 {% block content %}
     <h2>Profile</h2>
-    <p>Avatar name: {{profile.avatar}}</p>
-    <p>Email: {{profile.email}}</p>
-    <p>About Me: {{profile.about}}</p>
-    <button type="submit">Save</button>
+    <div>
+        <h3>Edit Profile</h3>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save</button>
+        </form>
+    </div>
+    <div>
+        <h3>Profile Information</h3>
+        <p>Avatar name: {{ profile.avatar }}</p>
+        <p>Email: {{ profile.email }}</p>
+        <p>About Me: {{ profile.about }}</p>
+    </div>
 {% endblock %}
