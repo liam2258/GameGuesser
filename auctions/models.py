@@ -16,7 +16,14 @@ class Bid(models.Model):
     bid = models.FloatField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="userBid")
 
-# auctions/models.py
+class Profile(models.Model):
+    image = models.ImageField(upload_to='profile_images')
+    avatar = models.CharField(max_length=50)
+    about = models.CharField(max_length=150)
+    email = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.avatar
 
 class Listing(models.Model):
     title = models.CharField(max_length=35)

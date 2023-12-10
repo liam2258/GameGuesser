@@ -8,41 +8,6 @@
         <title>{% block title %}Auctions{% endblock %}</title>
         <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css">
         <link rel="stylesheet" href="{% static 'auctions/uaa490styles.css' %}" >
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $("#commentForm").submit(function (event) {
-                    event.preventDefault();
-                    var form = $(this);
-                    var url = form.attr("data-url");
-
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: form.serialize(),
-                        success: function (data) {
-                            // Check if the comment list exists
-                            var commentList = $("#commentList");
-                            if (commentList.length === 0) {
-                                // If the list doesn't exist, create it
-                                commentList = $("<ul></ul>").attr("id", "commentList");
-                                // Append the list to the DOM
-                                form.after(commentList);
-                            }
-
-                            // Append the new comment to the list
-                            commentList.append("<li>User " + data.author + " says:<br/>" + data.message + "</li>");
-
-                            // Optionally, you can clear the comment input field
-                            form.find("input[name='comment']").val("");
-                        },
-                        error: function (xhr, errmsg, err) {
-                            console.log(errmsg);
-                        }
-                    });
-                });
-            });
-        </script>
     </head>
     <body>
         <header>
@@ -52,7 +17,7 @@
                     <a href="{% url 'index' %}">Home</a>
                     {% if user.is_authenticated %}
                         <a href="{% url 'profile' %}">Profile</a>
-                    <a href="{% url 'contact' %}" >Contact Us</a>
+                    <a href="{% url 'contact' %}" >Support</a>
                 </span>
                 <span>
                         Welcome <strong>{{ user.username }}!</strong>

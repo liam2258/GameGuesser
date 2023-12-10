@@ -1,18 +1,40 @@
 {% extends "auctions/layout.html" %}
 
 {% block main %}
-<h2>Create New Listing</h2>
-
-<form action="{% url 'contact' %}" method="POST">
-    {% csrf_token %}
-    <div>
-        <label for="title">Subject</label>
-        <input type="text" name="title" class="form-control" id="title" placeholder="Enter Subject">
-    </div>
-    <div>
-        <label for="description">Message</label>
-        <input type="text" name="description" class="form-control" id="description" placeholder="Share what you would like us to know!">
-    </div> 
-    <div>
-        <button type="submit">Send!</button>
-    </div>   
+    <h2>Contact Us</h2>
+    <article class="profile">
+        <section>
+            <h3>Liam Dyer</h3>
+            <!-- <h2><img src="images/avatar6.png"></h2> We could include a picture-->
+            <ul>
+                <li>Computer Science</li>
+                <li>?Github?</li>
+            </ul>
+        </section>
+    </article>
+    <article class="profile">
+        <section>
+            <h3>Mika Brassfield</h3>
+            <!-- <h2><img src="images/avatar6.png"></h2> -->
+            <ul>
+                <li>Computer Systems Engineering</li>
+                <li>?Github?</li>
+            </ul>
+        </section>
+    </article>
+<!-- 
+    <form action="{% url 'contact' %}" method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="title">Subject</label>
+            <input type="text" name="title" class="form-control" id="title" placeholder="Enter Subject">
+        </div>
+        <div>
+            <label for="description">Message</label>
+            <input type="text" name="description" class="form-control" id="description" placeholder="Share what you would like us to know!">
+        </div> 
+        <div>
+            <button type="submit">Send!</button>
+        </div>    
+    </form> -->
+{% endblock %}    
