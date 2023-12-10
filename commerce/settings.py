@@ -27,6 +27,23 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_NAME = 'GameGuesser'
+SITE_DOMAIN = '127.0.0.1:8000'
+SITE_PROTOCOL = 'https'  # or 'http' based on your setup
+PASSWORD_RESET_TIMEOUT_HOURS = 24 
+
+
+# settings.py
+# Configure your email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'utilityserviceemail@gmail.com'
+EMAIL_HOST_PASSWORD = 'zqzgqhtxnrzudniz'
+EMAIL_USE_TLS = True  # Set it to False if not using TLS
+DEFAULT_FROM_EMAIL = 'utilityserviceemail@gmail.com'
+
+
 
 # Application definition
 

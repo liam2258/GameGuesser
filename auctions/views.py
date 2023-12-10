@@ -87,3 +87,12 @@ def createProfile(request):
         form = ProfileForm()
 
     return render(request, "profile", {"form": form})
+
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.views import PasswordResetView
+
+class YourPasswordResetView(PasswordResetView):
+    template_name = 'auctions/reset_password.html'
+    form_class = PasswordResetForm
+    email_template_name = 'registration/password_reset_email.html'
+    success_url = 'password_reset_done'  # Make sure to adjust the success URL as needed
