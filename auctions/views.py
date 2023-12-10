@@ -4,7 +4,7 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.views import PasswordResetView
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
 from .models import User, Profile, Scores
@@ -81,15 +81,27 @@ def profile(request):
     return render(request, "auctions/profile.html", {"profile": profile_data})
 
 def editProfile(request):
+    profile = get_object_or_404(Profile, pk=1)  # Assuming there's only one profile object
+
     if request.method == "POST":
-        form = ProfileForm(request.POST, request.FILES)
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse("profile"))
     else:
-        form = ProfileForm()
+        form = ProfileForm(instance=profile)
 
-    return render(request, "auctions/edit.html", {"form": form, "edit": Profile.objects.first()})
+    return render(request, "auctions/edit.html", {"form": form, "edit": profile})
+# def editProfile(request):
+#     if request.method == "POST":
+#         form = ProfileForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect(reverse("profile"))
+#     else:
+#         form = ProfileForm()
+
+#     return render(request, "auctions/edit.html", {"form": form, "edit": Profile.objects.first()})
 
 
 class YourPasswordResetView(PasswordResetView):
