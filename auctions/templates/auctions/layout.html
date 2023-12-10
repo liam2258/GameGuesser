@@ -18,6 +18,7 @@
                     {% if user.is_authenticated %}
                         <a href="{% url 'profile' %}">Profile</a>
                     <a href="{% url 'contact' %}" >Support</a>
+                    <a href="{% url 'scores' %}">Leader Board</a>
                 </span>
                 <span>
                         Welcome <strong>{{ user.username }}!</strong>

@@ -7,7 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User, Profile
+from .models import User, Profile, Scores
 from .forms import ProfileForm
  
 def index(request):
@@ -106,3 +106,16 @@ class YourPasswordResetView(PasswordResetView):
     form_class = PasswordResetForm
     email_template_name = 'registration/password_reset_email.html'
     success_url = 'password_reset_done'  # Make sure to adjust the success URL as needed
+
+from django.shortcuts import render
+from .models import Scores  # Import your Scores model
+
+def scores(request):
+    # Retrieve all Scores objects ordered by high_score in descending order
+    scores = Scores.objects.all().order_by('-high_score')
+
+    # Pass the scores to a template or handle the data as needed
+    context = {
+        'scores': scores
+    }
+    return render(request, 'auctions/scores.html', context)

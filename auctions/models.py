@@ -6,6 +6,10 @@ from django.urls import reverse
 class User(AbstractUser):
     pass
 
+class Scores(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_score")
+    high_score = models.IntegerField(default=0)
+
 class Category(models.Model):
     categoryName = models.CharField(max_length=60)
 
