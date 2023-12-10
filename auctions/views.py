@@ -108,14 +108,25 @@ class YourPasswordResetView(PasswordResetView):
     success_url = 'password_reset_done'  # Make sure to adjust the success URL as needed
 
 from django.shortcuts import render
-from .models import Scores  # Import your Scores model
+from .models import User, Scores  # Import your models
 
 def scores(request):
-    # Retrieve all Scores objects ordered by high_score in descending order
-    scores = Scores.objects.all().order_by('-high_score')
+    # Retrieve all Users along with their Scores
+    users_with_scores = []
+    all_users = User.objects.all().order_by('username')
 
-    # Pass the scores to a template or handle the data as needed
+    for user in all_users:
+        # Retrieve the associated Scores for each User
+        try:
+            scores = Scores.objects.get(user=user)
+        except Scores.DoesNotExist:
+            scores = None
+
+        users_with_scores.append({'user': user, 'scores': scores})
+
     context = {
-        'scores': scores
+        'users_with_scores': users_with_scores
     }
     return render(request, 'auctions/scores.html', context)
+
+
