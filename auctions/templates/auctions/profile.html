@@ -2,8 +2,8 @@
 
 {% block main %}
     <div>
-        <h3>Profile Information</h3>
-        <p>Avatar name: {{ profile.avatar }}</p>
+        <img style="max-width: 20vw;" src="{{ profile.image }}">
+        <h3>{{ profile.avatar }}</h3>
         <p>Email: {{ profile.email }}</p>
         <p>About Me: {{ profile.about }}</p>
     </div>

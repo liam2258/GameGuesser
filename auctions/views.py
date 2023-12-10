@@ -70,25 +70,16 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
     
-def profile(request):
-    return render(request, "auctions/profile.html")
-
 def contact(request):
     return render(request, "auctions/contact.html")
 
 def reset(request):
     return render(request, "auctions/reset.html")
 
-# def createProfile(request):
-#     if request.method == "POST":
-#         form = ProfileForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(reverse("profile"))
-#     else:
-#         form = ProfileForm()
+def profile(request):
+    profile_data = Profile.objects.first()
+    return render(request, "auctions/profile.html", {"profile": profile_data})
 
-#     return render(request, "auctions/profile.html", {"form": form})
 def editProfile(request):
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES)
