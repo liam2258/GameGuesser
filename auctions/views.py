@@ -74,6 +74,9 @@ def profile(request):
 def contact(request):
     return render(request, "auctions/contact.html")
 
+def reset(request):
+    return render(request, "auctions/reset.html")
+
 def createProfile(request):
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES)

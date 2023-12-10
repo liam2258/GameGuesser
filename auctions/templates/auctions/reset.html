@@ -1,0 +1,19 @@
+{% extends "auctions/layout.html" %}
+
+{% block main %}
+
+    <h2>Enter Email</h2>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'send_reset' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input autofocus class="form-control" type="text" name="Email" placeholder="Email">
+        </div>
+    </form>
+
+
+{% endblock %}
