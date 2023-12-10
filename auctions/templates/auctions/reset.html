@@ -8,7 +8,7 @@
         <div>{{ message }}</div>
     {% endif %}
 
-    <form action="{% url 'send_reset' %}" method="post">
+    <form action="{% url 'reset' %}" method="post">
         {% csrf_token %}
         <div class="form-group">
             <input autofocus class="form-control" type="text" name="Email" placeholder="Email">
