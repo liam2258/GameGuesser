@@ -1,0 +1,37 @@
+[
+    {
+      "model": "auctions.user",
+      "pk": 1,
+      "fields": {
+        "username": "user1",
+        "password": "hashed_password_here",
+        "email": "user1@example.com"
+      }
+    },
+    {
+      "model": "auctions.scores",
+      "pk": 1,
+      "fields": {
+        "user": 1,
+        "high_score": 1000
+      }
+    },
+    {
+      "model": "auctions.user",
+      "pk": 2,
+      "fields": {
+        "username": "user2",
+        "password": "hashed_password_here",
+        "email": "user2@example.com"
+      }
+    },
+    {
+      "model": "auctions.scores",
+      "pk": 2,
+      "fields": {
+        "user": 2,
+        "high_score": 800
+      }
+    }
+  ]
+  
