@@ -89,7 +89,7 @@ def reset(request):
 #         form = ProfileForm()
 
 #     return render(request, "auctions/profile.html", {"form": form})
-def createProfile(request):
+def editProfile(request):
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
@@ -98,7 +98,7 @@ def createProfile(request):
     else:
         form = ProfileForm()
 
-    return render(request, "auctions/profile.html", {"form": form, "profile": Profile.objects.first()})
+    return render(request, "auctions/edit.html", {"form": form, "edit": Profile.objects.first()})
 
 
 class YourPasswordResetView(PasswordResetView):

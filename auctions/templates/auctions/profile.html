@@ -1,19 +1,16 @@
 {% extends "auctions/layout.html" %}
 
 {% block main %}
-    <h2>Profile</h2>
-    <div>
-        <h3>Edit Profile</h3>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Save</button>
-        </form>
-    </div>
     <div>
         <h3>Profile Information</h3>
         <p>Avatar name: {{ profile.avatar }}</p>
         <p>Email: {{ profile.email }}</p>
         <p>About Me: {{ profile.about }}</p>
     </div>
+    {% if user.is_authenticated %}
+    <form action="{% url 'edit' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Edit Profile</button>
+    </form>
+{% endif %}
 {% endblock %}
