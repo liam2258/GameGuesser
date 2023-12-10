@@ -104,20 +104,21 @@ from .models import User, Scores  # Import your models
 def scores(request):
     # Retrieve all Users along with their Scores
     users_with_scores = []
-    all_users = User.objects.all().order_by('username')
+    all_users = User.objects.all()
 
     for user in all_users:
         # Retrieve the associated Scores for each User
         try:
             scores = Scores.objects.get(user=user)
         except Scores.DoesNotExist:
-            scores = None
+            scores = 0
 
         users_with_scores.append({'user': user, 'scores': scores})
 
     context = {
         'users_with_scores': users_with_scores
     }
+    users_with_scores = Scores.objects.select_related('user').order_by('-high_score')
     return render(request, 'auctions/scores.html', context)
 
 
