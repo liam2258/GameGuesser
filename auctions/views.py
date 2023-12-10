@@ -86,7 +86,7 @@ def createProfile(request):
     else:
         form = ProfileForm()
 
-    return render(request, "profile", {"form": form})
+    return render(request, "auctions/profile.html", {"form": form})
 
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.views import PasswordResetView
