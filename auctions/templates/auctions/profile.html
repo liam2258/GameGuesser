@@ -2,7 +2,13 @@
 
 {% block main %}
     <div>
-        <img src="{{ profile.image.url }}" alt="Profile Image">
+        <style>
+            .profile-image {
+                max-width: 100%;
+                height: auto;
+            }
+        </style>
+        <img src="{{ profile.image }}" alt="Profile Image" class="profile-image">
         <h3>{{ profile.avatar }}</h3>
         <p>About Me: {{ profile.about }}</p>
     </div>
