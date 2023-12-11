@@ -82,6 +82,7 @@ def profile(request):
 
 import requests
 import random
+import json
 
 def play(request):
     key = '24ba40af039341fdb5fe051e64faa314'
@@ -109,6 +110,8 @@ def play(request):
 
     # Randomize the order of games
     random.shuffle(gameList)
+
+    gameList = json.dumps(gameList)
 
     # Pass the gameList to the template
     return render(request, "auctions/play.html", {"gameList": gameList})

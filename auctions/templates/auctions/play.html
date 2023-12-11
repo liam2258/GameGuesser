@@ -3,39 +3,54 @@
 {% block main %}
     <h2>Play</h2>
 
-    <div id="items-container" class="item-container">
-        <div class="item" id="item-0">
-            <h3>{{ gameList.0.title }}</h3>
-            <img src="{{ gameList.0.image }}" alt="{{ gameList.0.title }}">
-            <p>Metacritic Score: {{ gameList.0.score }}</p>
-            <p>Release Year: {{ gameList.0.release }}</p>
+    <div class="games-container">
+        <div id="game1">
+            <h3>Title: <span id="title1"></span></h3>
+            <img src="" alt="Game Image" id="image1">
+            <p>Released: <span id="release1"></span></p>
         </div>
-        <div class="item" id="item-1">
-            <h3>{{ gameList.1.title }}</h3>
-            <img src="{{ gameList.1.image }}" alt="{{ gameList.1.title }}">
-            <p>Metacritic Score: {{ gameList.1.score }}</p>
-            <p>Release Year: {{ gameList.1.release }}</p>
+    
+        <div id="game2">
+            <h3>Title: <span id="title2"></span></h3>
+            <img src="" alt="Game Image 2" id="image2">
+            <p>Released: <span id="release2"></span></p>
         </div>
     </div>
+    
 
     <style>
-        .item-container {
-            display: flex;
-            flex-wrap: wrap; /* Allow items to wrap */
-            gap: 20px; /* Add space between items */
+        .games-container {
+            display: flex; /* Use flexbox */
+            justify-content: space-between; /* Add space between the two games */
         }
-
-        .item {
-            flex: 0 0 calc(45% - 20px); /* Adjust width as needed with space between items */
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer; /* Add cursor pointer for better UX */
-        }
-
-        .item img {
-            max-width: 100%;
-            height: auto;
+        
+        /* Individual styles for each game div */
+        #game1, #game2 {
+            width: 45%; /* Adjust width as needed */
+            border: 1px solid #ccc; /* Example border for better visualization */
+            padding: 20px;
+            box-sizing: border-box; /* Include padding in width */
         }
     </style>
+
+    <script>
+        let counterValue = 0; // Initialize counter variable
+
+        function increment() {
+            counterValue++; // Increment the counter variable
+            document.getElementById("counter").innerText = counterValue; // Update the value displayed on the HTML page
+        }
+
+        var myList = JSON.parse('{{ gameList|safe }}');
+        console.log(myList[0]); // Verify the content of gameList
+
+        // Display features of gameList[1] in game1
+        document.getElementById("title1").innerText = myList[0].title;
+        document.getElementById("image1").src = myList[0].image;
+        document.getElementById("release1").innerText = myList[0].release;
+
+        document.getElementById("title2").innerText = myList[1].title;
+        document.getElementById("image2").src = myList[1].image;
+        document.getElementById("release2").innerText = myList[1].release;
+    </script>
 {% endblock %}
