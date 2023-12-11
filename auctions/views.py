@@ -80,8 +80,38 @@ def profile(request):
     profile_data = Profile.objects.first()
     return render(request, "auctions/profile.html", {"profile": profile_data})
 
+import requests
+import random
+
 def play(request):
-    return render(request, "auctions/play.html")
+    key = '24ba40af039341fdb5fe051e64faa314'
+    page = 1
+    r = requests.get(f"https://api.rawg.io/api/games?key={key}&page={page}")
+
+    data = r.json()
+
+    titles = []
+    scores = []
+    releases = []
+    images = []
+
+    for game in data['results']:
+        if game['metacritic'] and game['background_image']:
+            titles.append(game['name'])
+            scores.append(game['metacritic'])
+            releases.append(game['released'][:4])
+            images.append(game['background_image'])
+
+    gameList = [
+        {"title": title, "score": score, "release": release, "image": image}
+        for title, score, release, image in zip(titles, scores, releases, images)
+    ]
+
+    # Randomize the order of games
+    random.shuffle(gameList)
+
+    # Pass the gameList to the template
+    return render(request, "auctions/play.html", {"gameList": gameList})
 
 def editProfile(request):
     profile = get_object_or_404(Profile, pk=1)  # Assuming there's only one profile object

@@ -1,34 +1,36 @@
 {% extends "auctions/layout.html" %}
 
 {% block main %}
-
     <h2>Play</h2>
 
-    <div class="item-container">
-        <div class="item">
-            <h3>Title 1</h3>
-            <img src="image1.jpg" alt="Image 1">
-            <p>Subtext for Item 1</p>
+    <div id="items-container" class="item-container">
+        <div class="item" id="item-0">
+            <h3>{{ gameList.0.title }}</h3>
+            <img src="{{ gameList.0.image }}" alt="{{ gameList.0.title }}">
+            <p>Metacritic Score: {{ gameList.0.score }}</p>
+            <p>Release Year: {{ gameList.0.release }}</p>
         </div>
-
-        <div class="item">
-            <h3>Title 2</h3>
-            <img src="image2.jpg" alt="Image 2">
-            <p>Subtext for Item 2</p>
+        <div class="item" id="item-1">
+            <h3>{{ gameList.1.title }}</h3>
+            <img src="{{ gameList.1.image }}" alt="{{ gameList.1.title }}">
+            <p>Metacritic Score: {{ gameList.1.score }}</p>
+            <p>Release Year: {{ gameList.1.release }}</p>
         </div>
     </div>
 
     <style>
         .item-container {
             display: flex;
-            justify-content: space-between;
+            flex-wrap: wrap; /* Allow items to wrap */
+            gap: 20px; /* Add space between items */
         }
 
         .item {
-            width: 45%; /* Adjust width as needed */
+            flex: 0 0 calc(45% - 20px); /* Adjust width as needed with space between items */
             border: 1px solid #ccc;
             padding: 10px;
             text-align: center;
+            cursor: pointer; /* Add cursor pointer for better UX */
         }
 
         .item img {
@@ -36,5 +38,4 @@
             height: auto;
         }
     </style>
-
 {% endblock %}

@@ -15,3 +15,22 @@ body {
 .form-control {
   width: 50%;
 }
+
+.item-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap */
+  gap: 20px; /* Add space between items */
+}
+
+.item {
+  flex: 0 0 calc(45% - 20px); /* Adjust width as needed with space between items */
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer; /* Add cursor pointer for better UX */
+}
+
+.item img {
+  max-width: 100%;
+  height: auto;
+}
