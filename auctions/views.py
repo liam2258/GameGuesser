@@ -1,5 +1,6 @@
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.views import PasswordResetView
 from django.db import IntegrityError
@@ -116,8 +117,21 @@ def play(request):
     # Pass the gameList to the template
     return render(request, "auctions/play.html", {"gameList": gameList})
 
+# def editProfile(request):
+#     profile = get_object_or_404(Profile, pk=1)  # Assuming there's only one profile object
+
+#     if request.method == "POST":
+#         form = ProfileForm(request.POST, request.FILES, instance=profile)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect(reverse("profile"))
+#     else:
+#         form = ProfileForm(instance=profile)
+
+#     return render(request, "auctions/edit.html", {"form": form, "edit": profile})
+login_required
 def editProfile(request):
-    profile = get_object_or_404(Profile, pk=1)  # Assuming there's only one profile object
+    profile = Profile.objects.first()  # Or fetch the specific profile you want to edit
 
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, instance=profile)
