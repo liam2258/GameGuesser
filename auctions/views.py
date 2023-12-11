@@ -80,6 +80,9 @@ def profile(request):
     profile_data = Profile.objects.first()
     return render(request, "auctions/profile.html", {"profile": profile_data})
 
+def play(request):
+    return render(request, "auctions/play.html")
+
 def editProfile(request):
     profile = get_object_or_404(Profile, pk=1)  # Assuming there's only one profile object
 

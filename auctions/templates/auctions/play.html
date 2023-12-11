@@ -1,0 +1,40 @@
+{% extends "auctions/layout.html" %}
+
+{% block main %}
+
+    <h2>Play</h2>
+
+    <div class="item-container">
+        <div class="item">
+            <h3>Title 1</h3>
+            <img src="image1.jpg" alt="Image 1">
+            <p>Subtext for Item 1</p>
+        </div>
+
+        <div class="item">
+            <h3>Title 2</h3>
+            <img src="image2.jpg" alt="Image 2">
+            <p>Subtext for Item 2</p>
+        </div>
+    </div>
+
+    <style>
+        .item-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .item {
+            width: 45%; /* Adjust width as needed */
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .item img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+{% endblock %}

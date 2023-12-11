@@ -15,6 +15,7 @@ urlpatterns = [
     path("profile/", views.profile, name="profile"),
     path("edit/", views.editProfile, name="edit"),
     path("scores/", views.scores, name="scores"),
+    path("play/", views.play, name="play"),
 
     path('reset_password/', auth_views.PasswordResetView.as_view(), name='reset_password'),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
