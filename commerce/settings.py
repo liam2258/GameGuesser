@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 SITE_NAME = 'GameGuesser'
-SITE_DOMAIN = '127.0.0.1:8000'
+SITE_DOMAIN = 'video-game-guesser-74788c19d216.herokuapp.com'
 SITE_PROTOCOL = 'https'  # or 'http' based on your setup
 PASSWORD_RESET_TIMEOUT_HOURS = 24 
 
