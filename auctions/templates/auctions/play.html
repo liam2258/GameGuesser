@@ -8,12 +8,16 @@
             <h3>Title: <span id="title1"></span></h3>
             <img src="" alt="Game Image" id="image1">
             <p>Released: <span id="release1"></span></p>
+            <p>Score: <span id="score1"></span></p>
         </div>
     
         <div id="game2">
             <h3>Title: <span id="title2"></span></h3>
             <img src="" alt="Game Image 2" id="image2">
             <p>Released: <span id="release2"></span></p>
+            <p>Score: <span id="score2"></span></p>
+            <button onclick="checkGuess('more')">More</button>
+            <button onclick="checkGuess('less')">Less</button>
         </div>
     </div>
     
@@ -48,9 +52,26 @@
         document.getElementById("title1").innerText = myList[0].title;
         document.getElementById("image1").src = myList[0].image;
         document.getElementById("release1").innerText = myList[0].release;
+        document.getElementById("score1").innerText = myList[0].score;
 
         document.getElementById("title2").innerText = myList[1].title;
         document.getElementById("image2").src = myList[1].image;
         document.getElementById("release2").innerText = myList[1].release;
+        document.getElementById("score2").innerText = myList[1].score;
+
+        function checkGuess(choice) {
+        const score1 = parseFloat(document.getElementById("score1").innerText);
+        const score2 = parseFloat(document.getElementById("score2").innerText);
+
+        let isCorrect = false;
+
+        if (choice === 'more') {
+            isCorrect = score2 > score1;
+        } else if (choice === 'less') {
+            isCorrect = score2 < score1;
+        }
+
+        console.log(`Your guess was ${choice.toUpperCase()}. You were ${isCorrect ? 'correct' : 'wrong'}.`);
+    }
     </script>
 {% endblock %}
