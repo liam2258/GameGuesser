@@ -154,6 +154,8 @@ class YourPasswordResetView(PasswordResetView):
     success_url = 'password_reset_done'  # Make sure to adjust the success URL as needed
 
 
+from operator import itemgetter
+
 def scores(request):
     # Retrieve all Users along with their Scores
     users_with_scores = []
@@ -164,14 +166,18 @@ def scores(request):
         try:
             scores = Scores.objects.get(user=user)
         except Scores.DoesNotExist:
-            scores = 0
+            scores = Scores(user=user, high_score=0)
+            scores.save()
 
         users_with_scores.append({'user': user, 'scores': scores})
+
+    # Sort the users_with_scores list by high_score
+    users_with_scores.sort(key=lambda x: x['scores'].high_score, reverse=True)
 
     context = {
         'users_with_scores': users_with_scores
     }
-    users_with_scores = Scores.objects.select_related('user').order_by('-high_score')
+
     return render(request, 'auctions/scores.html', context)
 
 
