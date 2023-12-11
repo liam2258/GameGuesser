@@ -2,21 +2,21 @@
 {% extends "auctions/layout.html" %}
 
 {% block main %}
-    <h2>Play</h2>
+    <h2>Game on!</h2>
     <p>Streak: <span id="correctGuesses">0</span></p>
 
     <div class="games-container">
         <div id="game1">
-            <h3>Title: <span id="title1"></span></h3>
+            <h3><span id="title1"></span></h3>
             <img src="" alt="Game Image" id="image1">
-            <p>Released: <span id="release1"></span></p>
+            <p>Year released: <span id="release1"></span></p>
             <p>Score: <span id="score1"></span></p>
         </div>
 
         <div id="game2">
-            <h3>Title: <span id="title2"></span></h3>
+            <h3><span id="title2"></span></h3>
             <img src="" alt="Game Image 2" id="image2">
-            <p>Released: <span id="release2"></span></p>
+            <p>Year released: <span id="release2"></span></p>
             <p id="score2view" style="display: none;">Score: <span id="score2"></span></p>
             <button id="more" onclick="checkGuess('more')">More</button>
             <button id="less" onclick="checkGuess('less')">Less</button>
