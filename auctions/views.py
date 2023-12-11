@@ -81,17 +81,10 @@ def contact(request):
 def reset(request):
     return render(request, "auctions/reset.html")
 
+@login_required
 def profile(request):
     profile_data, created = Profile.objects.get_or_create(user=request.user)
-    print(profile_data.user)
-    print(profile_data.avatar)
     return render(request, "auctions/profile.html", {"profile": profile_data})
-
-# def profile(request):
-#     profile_data = Profile.objects.first()
-#     print(profile_data.user)
-#     print(profile_data.avatar)
-#     return render(request, "auctions/profile.html", {"profile": profile_data})
 
 def play(request):
     key = '24ba40af039341fdb5fe051e64faa314'
@@ -124,21 +117,6 @@ def play(request):
 
     # Pass the gameList to the template
     return render(request, "auctions/play.html", {"gameList": gameList})
-
-
-# @login_required
-# def editProfile(request):
-#     profile = Profile.objects.first()  # Or fetch the specific profile you want to edit
-
-#     if request.method == "POST":
-#         form = ProfileForm(request.POST, request.FILES, instance=profile)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(reverse("profile"))
-#     else:
-#         form = ProfileForm(instance=profile)
-
-#     return render(request, "auctions/edit.html", {"form": form, "edit": profile})
 
 @login_required
 def editProfile(request):
