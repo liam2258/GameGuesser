@@ -21,14 +21,21 @@ class Bid(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="userBid")
 
 
+from django.conf import settings
+
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profile", null=True, blank=True)
-    image = models.ImageField(upload_to='profile_images')  # Update to ImageField
-    avatar = models.CharField(max_length = 50)
-    about = models.CharField(max_length = 150)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_profile", null=True, blank=True)
+    image = models.ImageField(upload_to='profile_images')
+    avatar = models.CharField(max_length=50)
+    about = models.CharField(max_length=150)
 
     def __str__(self):
         return self.avatar
+
+    @property
+    def email(self):
+        return self.user.email if self.user else None
+
 
 class Listing(models.Model):
     title = models.CharField(max_length=35)
