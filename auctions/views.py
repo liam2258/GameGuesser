@@ -82,8 +82,16 @@ def reset(request):
     return render(request, "auctions/reset.html")
 
 def profile(request):
-    profile_data = Profile.objects.first()
+    profile_data, created = Profile.objects.get_or_create(user=request.user)
+    print(profile_data.user)
+    print(profile_data.avatar)
     return render(request, "auctions/profile.html", {"profile": profile_data})
+
+# def profile(request):
+#     profile_data = Profile.objects.first()
+#     print(profile_data.user)
+#     print(profile_data.avatar)
+#     return render(request, "auctions/profile.html", {"profile": profile_data})
 
 def play(request):
     key = '24ba40af039341fdb5fe051e64faa314'
@@ -117,8 +125,10 @@ def play(request):
     # Pass the gameList to the template
     return render(request, "auctions/play.html", {"gameList": gameList})
 
+
+# @login_required
 # def editProfile(request):
-#     profile = get_object_or_404(Profile, pk=1)  # Assuming there's only one profile object
+#     profile = Profile.objects.first()  # Or fetch the specific profile you want to edit
 
 #     if request.method == "POST":
 #         form = ProfileForm(request.POST, request.FILES, instance=profile)
@@ -129,20 +139,25 @@ def play(request):
 #         form = ProfileForm(instance=profile)
 
 #     return render(request, "auctions/edit.html", {"form": form, "edit": profile})
-login_required
+
+@login_required
 def editProfile(request):
-    profile = Profile.objects.first()  # Or fetch the specific profile you want to edit
+    profile, created = Profile.objects.get_or_create(user=request.user)
 
     if request.method == "POST":
+        print(request.user)
+        print(profile.avatar)
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
+            print(profile.avatar)
             return HttpResponseRedirect(reverse("profile"))
+        else:
+            return render(request, "auctions/edit.html", {"form": form, "edit": profile})
     else:
         form = ProfileForm(instance=profile)
 
     return render(request, "auctions/edit.html", {"form": form, "edit": profile})
-
 
 class YourPasswordResetView(PasswordResetView):
     template_name = 'auctions/reset_password.html'
