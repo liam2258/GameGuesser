@@ -118,6 +118,19 @@ def play(request):
     # Pass the gameList to the template
     return render(request, "auctions/play.html", {"gameList": gameList})
 
+def gameOver(request):
+    correct_guess_count = int(request.GET.get('correctGuessCount', 0))
+
+    # Fetch the current user's score instance
+    user_score, created = Scores.objects.get_or_create(user=request.user)
+
+    # Check if the high_score attribute exists in the Scores model
+    if correct_guess_count > user_score.high_score:
+        user_score.high_score = correct_guess_count
+        user_score.save()
+
+    return render(request, "auctions/gameOver.html", {'user_score': user_score.high_score})
+
 @login_required
 def editProfile(request):
     profile, created = Profile.objects.get_or_create(user=request.user)

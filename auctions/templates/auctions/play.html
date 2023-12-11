@@ -1,3 +1,4 @@
+ 
 {% extends "auctions/layout.html" %}
 
 {% block main %}
@@ -11,7 +12,7 @@
             <p>Released: <span id="release1"></span></p>
             <p>Score: <span id="score1"></span></p>
         </div>
-    
+
         <div id="game2">
             <h3>Title: <span id="title2"></span></h3>
             <img src="" alt="Game Image 2" id="image2">
@@ -23,7 +24,7 @@
             <button onclick="next('')" style="display: none;" id="nextButton">Next</button>
         </div>
     </div>
-    
+
     <style>
         .games-container {
             display: flex;
@@ -47,6 +48,10 @@
         let correctGuessCount = 0;
 
         var myList = JSON.parse('{{ gameList|safe }}');
+
+        var user = '{{user}}';
+
+        console.log(user);
 
         // Display features of gameList[0] in game1
         document.getElementById("title1").innerText = myList[0].title;
@@ -117,6 +122,8 @@
                     document.getElementById("release2").innerText = "";
                     document.getElementById("score2").innerText = "";
                 }
+            } else {
+                window.location.href = '{% url "gameOver" %}?correctGuessCount=' + correctGuessCount;
             }
             document.getElementById("more").style.display = "inline-block";
             document.getElementById("less").style.display = "inline-block";
