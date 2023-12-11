@@ -22,6 +22,7 @@ class Bid(models.Model):
 
 
 class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profile")
     image = models.ImageField(upload_to='profile_images')  # Update to ImageField
     avatar = models.CharField(max_length=50)
     about = models.CharField(max_length=150)

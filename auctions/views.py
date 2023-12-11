@@ -150,8 +150,6 @@ class YourPasswordResetView(PasswordResetView):
     email_template_name = 'registration/password_reset_email.html'
     success_url = 'password_reset_done'  # Make sure to adjust the success URL as needed
 
-from django.shortcuts import render
-from .models import User, Scores  # Import your models
 
 def scores(request):
     # Retrieve all Users along with their Scores
