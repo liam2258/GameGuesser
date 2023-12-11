@@ -2,6 +2,7 @@
 
 {% block main %}
     <h2>Play</h2>
+    <p>Streak: <span id="correctGuesses">0</span></p>
 
     <div class="games-container">
         <div id="game1">
@@ -15,10 +16,11 @@
             <h3>Title: <span id="title2"></span></h3>
             <img src="" alt="Game Image 2" id="image2">
             <p>Released: <span id="release2"></span></p>
-            <p>Score: <span id="score2"></span></p>
-            <button onclick="checkGuess('more')">More</button>
-            <button onclick="checkGuess('less')">Less</button>
-            <button onclick="checkGuess('draw')">Draw</button>
+            <p id="score2view" style="display: none;">Score: <span id="score2"></span></p>
+            <button id="more" onclick="checkGuess('more')">More</button>
+            <button id="less" onclick="checkGuess('less')">Less</button>
+            <button id="draw" onclick="checkGuess('draw')">Draw</button>
+            <button onclick="next('')" style="display: none;" id="nextButton">Next</button>
         </div>
     </div>
     
@@ -40,6 +42,10 @@
     <script>
         let nextGameIndex = 2; // Initialize the next game index
 
+        let isCorrect = false;
+
+        let correctGuessCount = 0;
+
         var myList = JSON.parse('{{ gameList|safe }}');
 
         // Display features of gameList[0] in game1
@@ -58,7 +64,7 @@
             const score1 = parseFloat(document.getElementById("score1").innerText);
             const score2 = parseFloat(document.getElementById("score2").innerText);
 
-            let isCorrect = false;
+            isCorrect = false;
 
             if (choice === 'more') {
                 isCorrect = score2 > score1;
@@ -68,6 +74,19 @@
                 isCorrect = score2 === score1; // Check if the scores are equal
             }
 
+            if (isCorrect) {
+                correctGuessCount++;
+                document.getElementById("correctGuesses").innerText = correctGuessCount;
+            }
+
+            document.getElementById("nextButton").style.display = "inline-block";
+            document.getElementById("score2view").style.display = "inline-block";
+            document.getElementById("more").style.display = "None";
+            document.getElementById("less").style.display = "None";
+            document.getElementById("draw").style.display = "None";
+        }
+
+        function next() {
             if (isCorrect) {
                 // Swap game1 and game2 values
                 if (nextGameIndex === 2) {
@@ -99,8 +118,11 @@
                     document.getElementById("score2").innerText = "";
                 }
             }
-
-            console.log(`Your guess was ${choice.toUpperCase()}. You were ${isCorrect ? 'correct' : 'wrong'}.`);
+            document.getElementById("more").style.display = "inline-block";
+            document.getElementById("less").style.display = "inline-block";
+            document.getElementById("draw").style.display = "inline-block";
+            document.getElementById("nextButton").style.display = "None";
+            document.getElementById("score2view").style.display = "None";
         }
     </script>
 {% endblock %}
