@@ -16,8 +16,8 @@
                 <span>
                     <a href="{% url 'index' %}">Home</a>
                     <a href="{% url 'scores' %}">Leaderboard</a>
-                    <a href="{% url 'play' %}">Play!</a>
                     {% if user.is_authenticated %}
+                    <a href="{% url 'play' %}">Play!</a>
                     
                 </span>
                 <span>
