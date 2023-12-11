@@ -9,6 +9,10 @@ from django.urls import reverse
 
 from .models import User, Profile, Scores
 from .forms import ProfileForm
+
+import requests
+import random
+import json
  
 def index(request):
    return render(request, "auctions/index.html")
@@ -80,10 +84,6 @@ def profile(request):
     profile_data = Profile.objects.first()
     return render(request, "auctions/profile.html", {"profile": profile_data})
 
-import requests
-import random
-import json
-
 def play(request):
     key = '24ba40af039341fdb5fe051e64faa314'
     page = 1
@@ -128,16 +128,6 @@ def editProfile(request):
         form = ProfileForm(instance=profile)
 
     return render(request, "auctions/edit.html", {"form": form, "edit": profile})
-# def editProfile(request):
-#     if request.method == "POST":
-#         form = ProfileForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(reverse("profile"))
-#     else:
-#         form = ProfileForm()
-
-#     return render(request, "auctions/edit.html", {"form": form, "edit": Profile.objects.first()})
 
 
 class YourPasswordResetView(PasswordResetView):
