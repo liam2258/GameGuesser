@@ -18,60 +18,89 @@
             <p>Score: <span id="score2"></span></p>
             <button onclick="checkGuess('more')">More</button>
             <button onclick="checkGuess('less')">Less</button>
+            <button onclick="checkGuess('draw')">Draw</button>
         </div>
     </div>
     
-
     <style>
         .games-container {
-            display: flex; /* Use flexbox */
-            justify-content: space-between; /* Add space between the two games */
+            display: flex;
+            justify-content: space-between;
         }
-        
+
         /* Individual styles for each game div */
         #game1, #game2 {
-            width: 45%; /* Adjust width as needed */
-            border: 1px solid #ccc; /* Example border for better visualization */
+            width: 45%;
+            border: 1px solid #ccc;
             padding: 20px;
-            box-sizing: border-box; /* Include padding in width */
+            box-sizing: border-box;
         }
     </style>
 
     <script>
-        let counterValue = 0; // Initialize counter variable
-
-        function increment() {
-            counterValue++; // Increment the counter variable
-            document.getElementById("counter").innerText = counterValue; // Update the value displayed on the HTML page
-        }
+        let nextGameIndex = 2; // Initialize the next game index
 
         var myList = JSON.parse('{{ gameList|safe }}');
-        console.log(myList[0]); // Verify the content of gameList
 
-        // Display features of gameList[1] in game1
+        // Display features of gameList[0] in game1
         document.getElementById("title1").innerText = myList[0].title;
         document.getElementById("image1").src = myList[0].image;
         document.getElementById("release1").innerText = myList[0].release;
         document.getElementById("score1").innerText = myList[0].score;
 
+        // Display features of gameList[1] in game2
         document.getElementById("title2").innerText = myList[1].title;
         document.getElementById("image2").src = myList[1].image;
         document.getElementById("release2").innerText = myList[1].release;
         document.getElementById("score2").innerText = myList[1].score;
 
         function checkGuess(choice) {
-        const score1 = parseFloat(document.getElementById("score1").innerText);
-        const score2 = parseFloat(document.getElementById("score2").innerText);
+            const score1 = parseFloat(document.getElementById("score1").innerText);
+            const score2 = parseFloat(document.getElementById("score2").innerText);
 
-        let isCorrect = false;
+            let isCorrect = false;
 
-        if (choice === 'more') {
-            isCorrect = score2 > score1;
-        } else if (choice === 'less') {
-            isCorrect = score2 < score1;
+            if (choice === 'more') {
+                isCorrect = score2 > score1;
+            } else if (choice === 'less') {
+                isCorrect = score2 < score1;
+            } else if (choice === 'draw') {
+                isCorrect = score2 === score1; // Check if the scores are equal
+            }
+
+            if (isCorrect) {
+                // Swap game1 and game2 values
+                if (nextGameIndex === 2) {
+                    document.getElementById("title1").innerText = myList[1].title;
+                    document.getElementById("image1").src = myList[1].image;
+                    document.getElementById("release1").innerText = myList[1].release;
+                    document.getElementById("score1").innerText = myList[1].score;
+                } else {
+                    document.getElementById("title1").innerText = myList[nextGameIndex].title;
+                    document.getElementById("image1").src = myList[nextGameIndex].image;
+                    document.getElementById("release1").innerText = myList[nextGameIndex].release;
+                    document.getElementById("score1").innerText = myList[nextGameIndex].score;
+                }
+
+                nextGameIndex++;
+
+                if (nextGameIndex < myList.length) {
+                    // Update game2 with the next game's details
+                    document.getElementById("title2").innerText = myList[nextGameIndex].title;
+                    document.getElementById("image2").src = myList[nextGameIndex].image;
+                    document.getElementById("release2").innerText = myList[nextGameIndex].release;
+                    document.getElementById("score2").innerText = myList[nextGameIndex].score;
+                } else {
+                    // If there are no more games in the list, display a message or handle accordingly
+                    console.log("No more games in the list!");
+                    document.getElementById("title2").innerText = "";
+                    document.getElementById("image2").src = "";
+                    document.getElementById("release2").innerText = "";
+                    document.getElementById("score2").innerText = "";
+                }
+            }
+
+            console.log(`Your guess was ${choice.toUpperCase()}. You were ${isCorrect ? 'correct' : 'wrong'}.`);
         }
-
-        console.log(`Your guess was ${choice.toUpperCase()}. You were ${isCorrect ? 'correct' : 'wrong'}.`);
-    }
     </script>
 {% endblock %}
