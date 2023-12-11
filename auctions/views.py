@@ -123,12 +123,9 @@ def editProfile(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
 
     if request.method == "POST":
-        print(request.user)
-        print(profile.avatar)
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            print(profile.avatar)
             return HttpResponseRedirect(reverse("profile"))
         else:
             return render(request, "auctions/edit.html", {"form": form, "edit": profile})
