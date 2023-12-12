@@ -1,13 +1,11 @@
 <!-- scores.html -->
-<!-- scores.html -->
-
 {% extends "auctions/layout.html" %}
 
 {% block main %}
     <h2>Leaderboard</h2>
 
     <input type="text" id="searchInput" placeholder="Search users...">
-    
+
     <ul id="usersList">
         {% for user_info in users_with_scores %}
             <li>{{ user_info.user.username }} - {% if user_info.scores %}{{ user_info.scores.high_score }}{% else %}0{% endif %}</li>
@@ -23,7 +21,7 @@
         // Event listener for input field
         input.addEventListener('input', function() {
             const filter = input.value.toLowerCase();
-            
+
             // Loop through all list items and hide those that don't match the search query
             for (let i = 0; i < li.length; i++) {
                 const username = li[i].textContent.toLowerCase();
@@ -35,5 +33,6 @@
             }
         });
     </script>
-{% endblock %}
 
+    
+{% endblock %}

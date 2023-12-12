@@ -16,15 +16,16 @@
                 <span>
                     <a href="{% url 'index' %}">Home</a>
                     <a href="{% url 'scores' %}">Leaderboard</a>
+                    <a href="{% url 'contact' %}">Contact</a>
                     {% if user.is_authenticated %}
                     <a href="{% url 'play' %}">Play!</a>
+                    {% endif %}  
                     
                 </span>
                 <span>
                     {% if user.is_authenticated %}
                         Welcome <a href = "{% url 'profile' %}"><strong>{{ user.username }}!</strong></a>
                         <a href="{% url 'logout' %}">Log Out</a>
-                    {% endif %}    
                     {% else %}
                         <a href="{% url 'login' %}">Log In</a>
                         <a href="{% url 'register' %}">Register</a>
