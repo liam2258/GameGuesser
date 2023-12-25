@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.views import PasswordResetView
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse
 
 from .models import User, Profile, Scores
@@ -14,6 +14,10 @@ from .forms import ProfileForm
 import requests
 import random
 import json
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
  
 def index(request):
    return render(request, "auctions/index.html")
@@ -57,7 +61,7 @@ def register(request):
 
         try:
             user = User.objects.create_user(username, email, password)
-            user.backend = 'django.contrib.auth.backends.ModelBackend'  # Set the backend
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
             user.save()
         except IntegrityError:
             return render(request, "auctions/register.html", {
@@ -87,7 +91,7 @@ def profile(request):
     return render(request, "auctions/profile.html", {"profile": profile_data})
 
 def play(request):
-    key = '24ba40af039341fdb5fe051e64faa314'
+    key = env('RAWG_API_KEY')
     page = 1
     r = requests.get(f"https://api.rawg.io/api/games?key={key}&page={page}")
 
