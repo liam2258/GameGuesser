@@ -28,16 +28,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
 SITE_NAME = 'GameGuesser'
 SITE_DOMAIN = 'video-game-guesser-74788c19d216.herokuapp.com'
-if DEBUG:
-    DOMAIN = 'http://127.0.0.1:8000'
-else:
-    DOMAIN = SITE_DOMAIN
 SITE_PROTOCOL = 'https'  # or 'http' based on your setup
 PASSWORD_RESET_TIMEOUT_HOURS = 24
 
