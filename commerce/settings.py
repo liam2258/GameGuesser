@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 SITE_NAME = 'GameGuesser'
 SITE_DOMAIN = 'video-game-guesser-74788c19d216.herokuapp.com'
 SITE_PROTOCOL = 'https'  # or 'http' based on your setup
-PASSWORD_RESET_TIMEOUT_HOURS = 24 
+PASSWORD_RESET_TIMEOUT_HOURS = 24
 
 
 # settings.py
@@ -43,10 +43,10 @@ PASSWORD_RESET_TIMEOUT_HOURS = 24
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'utilityserviceemail@gmail.com'
-EMAIL_HOST_PASSWORD = 'zqzgqhtxnrzudniz'
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True  # Set it to False if not using TLS
-DEFAULT_FROM_EMAIL = 'utilityserviceemail@gmail.com'
+DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER')
 
 
 
