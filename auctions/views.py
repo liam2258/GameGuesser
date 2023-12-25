@@ -155,7 +155,7 @@ class YourPasswordResetView(PasswordResetView):
     template_name = 'auctions/reset_password.html'
     form_class = PasswordResetForm
     email_template_name = 'registration/password_reset_email.html'
-    success_url = 'password_reset_done'  # Make sure to adjust the success URL as needed
+    success_url = 'password_reset_done'
 
 
 from operator import itemgetter
