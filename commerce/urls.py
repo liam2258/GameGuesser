@@ -18,25 +18,9 @@ from django.urls import include, path
 
 # commerce/urls.py
 
-from django.contrib.sitemaps import GenericSitemap  # Importing sitemap generating library
-from django.contrib.sitemaps.views import sitemap  # Importing sitemap generating function
-
-from auctions.models import Listing  # Importing all Listing pages on our website
-
 # Define the fields for the sitemap
-info_dict = {
-    "queryset": Listing.objects.filter(isActive=True), # Get all active listings
-    "date_field": "updated_at", # Get the time the page was updated
-}
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("auctions.urls")),
-
-    # Create a url path for ever
-    path(
-        "sitemap.xml",
-        sitemap, # Call sitemap generator and pass it the sitemap class filled by our dictionary
-        {"sitemaps": {"auctions": GenericSitemap(info_dict)}},
-    ),
 ]
