@@ -24,19 +24,20 @@ def index(request):
 
 def login_view(request):
     if request.method == "POST":
-
-        # Attempt to sign user in
-        username = request.POST["username"]
-        password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
-
-        # Check if authentication successful
-        if user is not None:
-            login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        if username is not None and password is not None:
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(reverse("index"))
+            else:
+                return render(request, "auctions/login.html", {
+                    "message": "Invalid username and/or password."
+                })
         else:
             return render(request, "auctions/login.html", {
-                "message": "Invalid username and/or password."
+                "message": "Username and password are required."
             })
     else:
         return render(request, "auctions/login.html")

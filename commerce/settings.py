@@ -112,16 +112,34 @@ WSGI_APPLICATION = 'commerce.wsgi.application'
 
 # settings.py
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('PORT'),
+import sys
+if 'test' in sys.argv:
+    #Configuration for test database
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': env('TEST_DB_NAME'),
+            'USER': env('TEST_DB_USER'),
+            'PASSWORD': env('TEST_DB_PASSWORD'),
+            'HOST': env('TEST_DB_HOST'),
+            'PORT': env('PORT'),
+            'TEST': {
+                'NAME': env('TEST_DB_NAME'),
+            }
+        }
     }
-}
+else:
+  #Default configuration
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': env('DB_NAME'),
+            'USER': env('DB_USER'),
+            'PASSWORD': env('DB_PASSWORD'),
+            'HOST': env('DB_HOST'),
+            'PORT': env('PORT'),
+        }
+    }
 
 AUTH_USER_MODEL = 'auctions.User'
 
