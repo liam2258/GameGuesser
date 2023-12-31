@@ -3,8 +3,6 @@ name: Django application test with Github Actions
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   build:
