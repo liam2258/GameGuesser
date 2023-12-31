@@ -25,10 +25,10 @@ jobs:
         python manage.py test --keepdb
       env:
         TEST_DB_NAME: ${{ secrets.TEST_DB_NAME }}
-        TEST_DB_USER: kmwgqoxngbjjsi
-        TEST_DB_PASSWORD: 7050a16b1d1959f9c86e657eecd65dec074fc761ae43ba11d98058ae2ab27c5a
-        TEST_DB_HOST: ec2-34-228-248-175.compute-1.amazonaws.com
-        SECRET_KEY: 6ps8j!crjgrxt34cqbqn7x&b3y%(fny8k8nh21+qa)%ws3fh!q
-        EMAIL_HOST_PASSWORD: zqzgqhtxnrzudniz
-        EMAIL_HOST_USER: utilityserviceemail@gmail.com
-        PORT: 5432
+        TEST_DB_USER: ${{ secrets.TEST_DB_USER }}
+        TEST_DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
+        TEST_DB_HOST: ${{ secrets.TEST_DB_HOST }}
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }}
+        EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST_USER }}
+        PORT: ${{ secrets.PORT }}
