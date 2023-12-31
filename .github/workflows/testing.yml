@@ -31,3 +31,5 @@ jobs:
         TEST_DB_HOST: ${{ secrets.TEST_DB_HOST }}
         DB_HOST: ${{ secrets.DB_HOST }}
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }}
+        EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST_USER }}
