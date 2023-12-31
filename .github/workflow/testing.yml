@@ -1,4 +1,4 @@
-name: Django application test with Github Actions
+name: Django application test with Github Actions 
 
 on:
   push:
