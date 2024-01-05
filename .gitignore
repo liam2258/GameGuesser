@@ -1,4 +1,5 @@
 commerce/.env
+commerce/__pycache__
 auctions/.env
 auctions/__pycache__
 venv
