@@ -23,7 +23,6 @@ For Linux:
 ```
 
 After activation you can install the dependencies using:
-For Windows:
 ```bash
   pip install -r requirements.txt
 ```
