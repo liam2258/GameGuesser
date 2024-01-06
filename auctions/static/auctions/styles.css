@@ -1,0 +1,227 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+  background-color: #0a3d62; /* Darker blue */
+  color: #f5f6fa; /* Lighter blue */
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+nav a {
+  color: #f5f6fa; /* Lighter blue */
+  text-decoration: none;
+  margin: 0 10px;
+  padding: 8px 15px; /* Slightly increased padding for more vibrant appearance */
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  background-color: #1289a7; /* Medium blue */
+}
+
+nav a:hover {
+  background-color: #45aaf2; /* Lighter medium blue for hover effect */
+}
+
+/* Main Styles (Add your own custom styles for main content here) */
+main {
+  padding: 20px;
+  text-align: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  header {
+      padding: 10px;
+  }
+  h1 {
+      font-size: 2em;
+  }
+  nav {
+      flex-direction: column;
+      margin-top: 10px;
+  }
+  nav span {
+      margin-top: 10px;
+  }
+}
+
+/*Scores*/
+
+/* Score Card Styles */
+.user-scores {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-scores li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.left-content {
+  display: flex;
+  align-items: center;
+}
+
+.rank {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.score-card {
+  border: 2px solid #3498db;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  max-width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#searchInput {
+  margin-top: 10px;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/*Play page*/
+
+.games-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.game-card {
+  width: 45%;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.game-card h3 {
+  margin-top: 0;
+}
+
+.game-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.button-container button {
+  margin: 5px;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: #fff;
+  cursor: pointer;
+}
+
+.button-container button:hover {
+  background-color: #2980b9;
+}
+
+/*Contact page*/
+
+/* CSS Styles for Profile Cards */
+.profile-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profile-card {
+  flex: 0 0 calc(45% - 20px);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+}
+
+.profile-info {
+  padding: 20px;
+}
+
+.profile-info h3 {
+  margin-top: 0;
+}
+
+.profile-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+}
+
+.profile-info ul li {
+  margin-bottom: 8px;
+}
+
+.profile-info a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.profile-info a:hover {
+  text-decoration: underline;
+}
+
+/* Media Query for smaller screens */
+@media screen and (max-width: 768px) {
+  .profile-card {
+      flex: 0 0 100%;
+      margin-right: 0;
+  }
+}

@@ -2,43 +2,30 @@
 {% extends "auctions/layout.html" %}
 
 {% block main %}
-    <h2>Game on!</h2>
-    <p>Streak: <span id="correctGuesses">0</span></p>
+<h2>Game on!</h2>
+<p>Streak: <span id="correctGuesses">0</span></p>
 
-    <div class="games-container">
-        <div id="game1">
-            <h3><span id="title1"></span></h3>
-            <img src="" alt="Game Image" id="image1">
-            <p>Year released: <span id="release1"></span></p>
-            <p>Score: <span id="score1"></span></p>
-        </div>
+<div class="games-container">
+    <div id="game1" class="game-card">
+        <h3><span id="title1"></span></h3>
+        <img src="" alt="Game Image" id="image1" class="game-image">
+        <p>Year released: <span id="release1"></span></p>
+        <p>Score: <span id="score1"></span></p>
+    </div>
 
-        <div id="game2">
-            <h3><span id="title2"></span></h3>
-            <img src="" alt="Game Image 2" id="image2">
-            <p>Year released: <span id="release2"></span></p>
-            <p id="score2view" style="display: none;">Score: <span id="score2"></span></p>
+    <div id="game2" class="game-card">
+        <h3><span id="title2"></span></h3>
+        <img src="" alt="Game Image 2" id="image2" class="game-image">
+        <p>Year released: <span id="release2"></span></p>
+        <p id="score2view" style="display: none;">Score: <span id="score2"></span></p>
+        <div class="button-container">
             <button id="more" onclick="checkGuess('more')">More</button>
             <button id="less" onclick="checkGuess('less')">Less</button>
             <button id="draw" onclick="checkGuess('draw')">Draw</button>
             <button onclick="next('')" style="display: none;" id="nextButton">Next</button>
         </div>
     </div>
-
-    <style>
-        .games-container {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* Individual styles for each game div */
-        #game1, #game2 {
-            width: 45%;
-            border: 1px solid #ccc;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-    </style>
+</div>
 
     <script>
         let nextGameIndex = 2; // Initialize the next game index
